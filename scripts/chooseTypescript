@@ -1,6 +1,0 @@
-echo "Choosing Typescript..."
-node ./scripts/modifyConfigFiles.js Typescript
-node ./scripts/removeDeps.js Typescript
-rm .circleci/config.yml
-mv .circleci/config-template.yml .circleci/config.yml
-sh ./scripts/cleanup.sh

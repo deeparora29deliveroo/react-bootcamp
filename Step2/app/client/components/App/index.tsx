@@ -2,6 +2,8 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { AppLayout, SimplePageLayout, Text } from '@deliveroo/tools-component-library';
 
+import DropDown from '../DropDown';
+
 const sidebarNavigation = [
   {
     badgeCount: 0,
@@ -27,6 +29,7 @@ const App: React.FC = () => (
         This content is part of your app! There is so much you can do. You have TCL installed, which
         will help you build your brand new app!
       </Text>
+      <DropDown />
       <br />
       <Text>
         <a href="https://tools-component-library.deliveroo.net/">

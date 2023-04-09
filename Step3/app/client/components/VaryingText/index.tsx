@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 const mapStateToPros = (state: any) => {
   return {
     selectedValue: state.selectedValue,
-    allValues: state.allValues,
   };
 };
 

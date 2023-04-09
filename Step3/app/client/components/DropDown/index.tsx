@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select, Option, Text } from '@deliveroo/tools-component-library';
+import { Select, Option} from '@deliveroo/tools-component-library';
 import { connect } from 'react-redux';
 
 const mapStateToPros = (state: any) => {
@@ -33,7 +33,6 @@ function DropDown(props: any) {
           <Option value={value}>{value}</Option>
         ))}
       </Select>
-      <Text>{`Selected value is ${props.selectedValue}`}</Text>
     </>
   );
 }

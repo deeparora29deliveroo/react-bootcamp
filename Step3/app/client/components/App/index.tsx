@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import { AppLayout, SimplePageLayout, Text } from '@deliveroo/tools-component-library';
 
 import ConnectedDropDown from '../DropDown';
+import VaryingText from "../VaryingText";
 
 const sidebarNavigation = [
   {
@@ -30,7 +31,7 @@ const App: React.FC = () => (
         will help you build your brand new app!
       </Text>
       <ConnectedDropDown />
-      <ConnectedDropDown />
+      <VaryingText/>
       <br />
       <Text>
         <a href="https://tools-component-library.deliveroo.net/">

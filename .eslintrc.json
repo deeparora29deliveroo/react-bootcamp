@@ -1,0 +1,27 @@
+{
+  "extends": [
+    "@deliveroo/eslint-config",
+    "@deliveroo/eslint-config/react",
+    "@deliveroo/eslint-config/typescript"
+  ],
+  "plugins": ["jest"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "import/resolver": {
+      "webpack": {
+        "config": {
+          "resolve": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          }
+        }
+      }
+    }
+  },
+  "rules": {
+    "@typescript-eslint/camelcase": "off",
+    "no-use-before-define": "off",
+    "import/extensions": "off"
+  }
+}

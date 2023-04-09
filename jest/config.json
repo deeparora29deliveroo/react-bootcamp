@@ -1,0 +1,30 @@
+{
+  "rootDir": "../",
+  "setupFilesAfterEnv": [
+    "./jest/setup.js",
+    "./jest/esbuild-react-global.js"
+  ],
+  "moduleNameMapper": {
+    "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "identity-obj-proxy",
+    "\\.(css|scss)$": "identity-obj-proxy"
+  },
+  "coverageDirectory": "coverage",
+  "snapshotSerializers": [
+    "enzyme-to-json/serializer"
+  ],
+  "cacheDirectory": "./jest/cache",
+  "testEnvironment": "jsdom",
+  "transform": {
+    "\\.(js|jsx|ts|tsx)$": [
+      "esbuild-jest",
+      {
+        "sourcemap": true
+      }
+    ]
+  },
+  "watchPlugins": [
+    "jest-watch-typeahead/filename",
+    "jest-watch-typeahead/testname"
+  ],
+  "preset": "ts-jest"
+}

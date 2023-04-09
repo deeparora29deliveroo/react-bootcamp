@@ -1,0 +1,8 @@
+{
+  "extends": "@deliveroo/tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "jsx": "react"
+  },
+  "include": ["typings/**/*", "./app/client"]
+}

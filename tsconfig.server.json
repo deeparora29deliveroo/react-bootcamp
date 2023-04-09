@@ -1,0 +1,7 @@
+{
+  "extends": "@deliveroo/tsconfig",
+  "compilerOptions": {
+    "outDir": "./dist"
+  },
+  "include": ["typings/**/*", "./app/server/**/*"]
+}

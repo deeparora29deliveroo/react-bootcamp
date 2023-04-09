@@ -1,0 +1,113 @@
+# GLOBAL-ANCHORS - DockerHub Authentication changes applied - PROD-1431 / PROD-1435
+global_dockerhub_login: &global_dockerhub_login
+  run:
+    name: Authenticate with hub.docker.com - DockerHub
+    command: docker login -u $GLOBAL_DOCKERHUB_USERNAME -p $GLOBAL_DOCKERHUB_PASSWORD
+global_context: &global_context
+  context:
+    - org-global
+global_remote_docker: &global_remote_docker
+  version: 19.03.13
+global_dockerhub_auth: &global_dockerhub_auth
+  auth:
+    username: $GLOBAL_DOCKERHUB_USERNAME
+    password: $GLOBAL_DOCKERHUB_PASSWORD
+
+version: 2
+cimg_runner: &cimg_runner
+  docker:
+    - image: cimg/node:16.16.0
+deliveroo_runner: &deliveroo_runner
+  docker:
+    - image: deliveroo/circleci:1
+      <<: *global_dockerhub_auth
+
+build_test_lint: &build_test_lint
+  steps:
+    - checkout
+    - run:
+        name: Make language decision
+        command: yarn choose:${LANGUAGE}
+    - run:
+        name: Build application
+        command: yarn build
+    - run:
+        name: Run linting
+        command: yarn lint
+    - run:
+        name: Run tests
+        command: yarn test
+
+deploy_web_app: &deploy_web_app
+  steps:
+    - setup_remote_docker:
+        docker_layer_caching: true
+        reusable: true
+        <<: *global_remote_docker
+    - *global_dockerhub_login
+    - checkout
+    - run:
+        name: Ensure we're deploying last commit.
+        command: ensure_head
+    - run:
+        name: Build and tag the CI image
+        command: |
+          `print_env ${TARGET}`
+          ci build \
+            --build-arg PIPELINE_ARG=template \
+            --build-arg ENVIRONMENT_NAME_ARG=${TARGET} \
+            --build-arg RELEASE_HASH_ARG=${CIRCLE_SHA1} \
+            --build-arg EXAMPLE_BUILD_ENV_VAR_ARG=${EXAMPLE_BUILD_ENV_VAR}
+          ci tag
+    - run:
+        name: Push image to ECR repository
+        command: |
+          `print_env ${TARGET}`
+          push_image_to_ecr
+
+jobs:
+  build_test_lint_js:
+    <<: *cimg_runner
+    <<: *build_test_lint
+    environment:
+      LANGUAGE: javascript
+  build_test_lint_ts:
+    <<: *cimg_runner
+    <<: *build_test_lint
+    environment:
+      LANGUAGE: typescript
+  push_app_staging:
+    <<: *deliveroo_runner
+    <<: *deploy_web_app
+    environment:
+      TARGET: staging
+  push_app_production:
+    <<: *deliveroo_runner
+    <<: *deploy_web_app
+    environment:
+      TARGET: production
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build_test_lint_js
+      - build_test_lint_ts
+      - push_app_staging:
+          requires:
+            - build_test_lint_js
+            - build_test_lint_ts
+          filters:
+            branches:
+              only:
+                - staging
+          <<: *global_context
+      - push_app_production:
+          requires:
+            - build_test_lint_js
+            - build_test_lint_ts
+          filters:
+            branches:
+              only:
+                - master
+          <<: *global_context

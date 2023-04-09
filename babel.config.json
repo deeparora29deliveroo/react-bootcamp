@@ -1,0 +1,11 @@
+{
+  "exclude": ".d.ts",
+  "plugins": [
+    [
+      "@babel/plugin-transform-typescript",
+      {
+        "isTSX": true
+      }
+    ]
+  ]
+}

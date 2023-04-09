@@ -1,0 +1,3 @@
+echo "Renaming ts(x) to js(x)..."
+find ./app -name '*.ts' -exec sh -c 'mv "$0" "${0%.ts}.js"' {} \;
+find ./app -name '*.tsx' -exec sh -c 'mv "$0" "${0%.tsx}.jsx"' {} \;

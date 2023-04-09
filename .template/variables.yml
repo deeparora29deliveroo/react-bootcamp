@@ -1,0 +1,7 @@
+configured:
+  Project Title: Project title, as humans will read it
+  cdt-created-app.deliveroo.net: Fully qualified (production) domain name for this tool
+calculated:
+  project-name:
+    # This uses whatever the creator names their new repo
+    source: project-name

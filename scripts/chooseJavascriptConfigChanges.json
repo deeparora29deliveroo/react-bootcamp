@@ -1,0 +1,45 @@
+{
+  "jestJson": {
+    "removeProperties": [
+      "preset"
+    ]
+  },
+  "eslintJson": {
+    "removeProperties": [
+      "rules"
+    ],
+    "removeFromArray": {
+      "extends": [
+        "@deliveroo/eslint-config/typescript"
+      ]
+    },
+    "addProperties": {
+      "parserOptions": {
+        "babelOptions": {
+          "parserOpts": {
+            "plugins": ["jsx"]
+          }
+        }
+      }
+    }
+  },
+  "packageJson": {
+    "changeProperties": {
+      "scripts.build:server": "cp -R ./app/server ./dist/app && cp app/env.js dist/app/env.js && cp package.json ./dist"
+    },
+    "removeProperties": [
+      "scripts.choose:javascript",
+      "scripts.choose:typescript",
+      "scripts.decision:notMade"
+    ],
+    "findAndReplace": {
+      "yarn decision:notMade && ": ""
+    }
+  },
+  "cdtJs": {
+    "findAndReplace": {
+      "./app/server/index.ts": "./app/server/index.js",
+      "typeScript: { enabled: true }, // MUST REMAIN ON ONE LINE UNTIL TS/JS CHOICE MADE": ""
+    }
+  }
+}

@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+
+  identity_proxy:
+    image: deliveroo/local-alb-auth-proxy
+    environment:
+      - HOST_IP=0.0.0.0
+      - BASE_IDENTITY_URI=https://identity-staging.deliveroo.com
+      # More information available at https://github.com/deliveroo/local-alb-auth-proxy
+      # You'll need to register your application (can be seen in the README from the link above)
+      - CLIENT_ID=XXX
+      - CLIENT_SECRET=XXX
+      - SOURCE_BASE_URI=https://cdt-created-app.deliveroo.net.test
+      - TARGET_BASE_URI=http://web:4444 # This will need to match the PORT being used locally
+      - SCOPES=employee profile email openid
+    ports:
+      - 4444:3000

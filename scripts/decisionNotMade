@@ -1,0 +1,9 @@
+echo "x-----------------------------------------------------------------------------------------x"
+echo "|                                      ! STOP !                                           |"
+echo "x-----------------------------------------------------------------------------------------x"
+echo "| You must make a choice between using JavaScript and TypeScript before running commands. |"
+echo "| You can do this by running 'yarn choose:javascript' or 'yarn choose:typescript'.        |"
+echo "|                                                                                         |"
+echo "| See the readme for more information.                                                    |"
+echo "x-----------------------------------------------------------------------------------------x"
+exit 1

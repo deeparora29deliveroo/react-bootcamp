@@ -5,7 +5,10 @@ This bootcamp specifically covers the following concepts:
 1. **Step1**: Using useState React hook to change with local state.
 1. **Step2**: Using useEffect React hook side effect in your applicaton.
 1. **Step3**: Using redux store in your application.
+![Page1](/docs/page1.png)
+
 1. **Step4**: Add multiple routes to your application.
+![Page2](/docs/page2.png)
 
 ## Commands
 

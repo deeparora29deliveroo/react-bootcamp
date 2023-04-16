@@ -12,5 +12,5 @@ This bootcamp specifically covers the following concepts:
 1. `yarn install` - Installs the packages in package.json
 1. `yarn dev` - Starts the app in development mode with hot-reloading when anything changes
 
-Local Server can be found at http://localhost:4444/
+Local Server can be accessed at http://localhost:4444/
 

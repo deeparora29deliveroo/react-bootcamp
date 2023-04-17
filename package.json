@@ -67,6 +67,6 @@
     "react-helmet": "^6.0.0",
     "ts-jest": "^29.0.3",
     "ts-node": "^10.9.1",
-    "webpack": "^5.74.0"
+    "webpack": "^5.76.0"
   }
 }
